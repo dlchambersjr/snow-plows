@@ -1,0 +1,22 @@
+[
+  {
+    "plowID": "1",
+    "plowType": "Dedicated plow with salt spreader",
+    "location": "Queen Anne"
+  },
+  {
+    "plowID": "2",
+    "plowType": "Dedicated plow with salt spreader",
+    "location": "West Seattle"
+  },
+  {
+    "plowID": "3",
+    "plowType": "multi-purpose truck",
+    "location": "SODO"
+  },
+  {
+    "plowID": "4",
+    "plowType": "multi-purpose truck",
+    "location": "Columbia City"
+  }
+]
