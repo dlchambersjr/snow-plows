@@ -1,73 +1,54 @@
 import React from 'react';
+import If from './if.js';
 
 
 export default class Form extends React.Component {
   constructor(props) {
     super(props);
-    console.log(props)
-
     this.state = {
-      id: "empty",
-      type: "empty",
-      location: "empty",
+      id: null,
+      type: '',
+      location: '',
+      neigborhoods: ['Queen Anne', 'West Seattle', 'SODO', 'Columbia City'],
     };
+  }
 
+  componentWillReceiveProps = (nextProps) => {
+    let { id, type, location } = nextProps;
+    this.setState({ id, type, location });
   }
 
   handleChange = (event) => {
-    // let name = event.target.name;
-    // let value = event.target.value;
-    // console.log(name, value);
-    // this.setState({ [name]: value })
-
-
-    // console.log('event data', event.target);
-
-    // let id = event.target.id.value;
-    // let type = event.target.type.value;
-    // let location = event.target.location.value;
-
-    // this.setState({ id, type, location });
-
+    this.setState({ [event.target.name]: event.target.value });
   }
 
-  handleSubmit(event) {
+  handleSubmit = (event) => {
     event.preventDefault();
-    // let id = event.target.id.value;
-    // let type = event.target.type.value;
-    // let location = event.target.location.value;
 
-    // console.log(id, type, location);
-
-    this.setState({
-      id: event.target.id.value,
+    let updateData = {
+      plowIdx: this.props.index,
+      id: parseInt(event.target.id.value),
       type: event.target.type.value,
-      location: event.target.location.value
-    });
+      location: event.target.location.value,
+    }
 
-    // this.setState({ id: id, type: type, location: location });
-
-
-    // let updateData = {
-    //   id: event.target.id.value,
-    //   type: event.target.type.value,
-    //   location: event.target.location.value,
-    // }
-    // console.log(updateData);
-
-    // this.props.onSubmit(updateData);
-    // onChange={this.handleChange}
+    this.props.onSubmit(updateData);
   }
 
   render() {
-
+    console.log('FORM STATE: ', this.state);
     return (
-      <form onSubmit={this.handleSubmit} >
-        <label>ID: <input value={this.props.id} name="id" size="5" /></label>
-        <label>TYPE:  <input value={this.props.type} name="type" size="35" /></label>
-        <label>LOCATION:  <input value={this.props.location} name="location" size="15" /></label>
-        <button>Update</button>
-      </form>
+      <If condition={this.props.formView}>
+        <form onSubmit={this.handleSubmit} onChange={this.handleChange} >
+          <label>ID: <input defaultValue={this.state.id} name="id" size="3" /> </label>
+          <label>TYPE:  <input defaultValue={this.state.type} name="type" size="35" /> </label>
+          <label>LOCATION:  <select value={this.state.location} name="location" onChange={this.handleChange}>
+            {this.state.neigborhoods.map((hood, index) => {
+              return <option key={index} value={hood}>{hood}</option>
+            })} </select> </label>
+          <button>Update</button>
+        </form>
+      </If>
     );
   }
 }
