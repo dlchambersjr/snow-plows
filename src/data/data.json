@@ -1,22 +1,22 @@
 [
   {
     "id": "1",
-    "type": "Dedicated - with salt spreader",
+    "type": "Dedicated",
     "location": "Queen Anne"
   },
   {
     "id": "2",
-    "type": "Dedicated - with salt spreaderr",
+    "type": "Dedicated w/ Salt",
     "location": "West Seattle"
   },
   {
     "id": "3",
-    "type": "Multi-Purpose truck",
+    "type": "Multi-Purpose Truck",
     "location": "SODO"
   },
   {
     "id": "4",
-    "type": "Multi-Purpose truck",
+    "type": "Sidewalk Blower",
     "location": "Columbia City"
   }
 ]

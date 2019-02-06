@@ -1,6 +1,7 @@
 import React from 'react';
-import If from './if.js';
+import If from '../../middleware/if.js';
 
+import './form.css';
 
 export default class Form extends React.Component {
   constructor(props) {
@@ -9,7 +10,8 @@ export default class Form extends React.Component {
       id: null,
       type: '',
       location: '',
-      neigborhoods: ['Queen Anne', 'West Seattle', 'SODO', 'Columbia City'],
+      neigborhoods: ['Queen Anne', 'West Seattle', 'SODO', 'Columbia City', 'Green Lake', 'Georgetown'],
+      plowTypes: ['Dedicated', 'Dedicated w/ Salt', 'Multi-Purpose Truck', 'Sidewalk Blower']
     };
   }
 
@@ -27,7 +29,7 @@ export default class Form extends React.Component {
 
     let updateData = {
       plowIdx: this.props.index,
-      id: parseInt(event.target.id.value),
+      id: parseInt(this.state.id),
       type: event.target.type.value,
       location: event.target.location.value,
     }
@@ -36,16 +38,21 @@ export default class Form extends React.Component {
   }
 
   render() {
-    console.log('FORM STATE: ', this.state);
     return (
       <If condition={this.props.formView}>
-        <form onSubmit={this.handleSubmit} onChange={this.handleChange} >
-          <label>ID: <input defaultValue={this.state.id} name="id" size="3" /> </label>
-          <label>TYPE:  <input defaultValue={this.state.type} name="type" size="35" /> </label>
+        <form onSubmit={this.handleSubmit}>
+          <h2>Edit Plow ID: {this.state.id}</h2>
+
+          <label>TYPE:  <select value={this.state.type} name="type" onChange={this.handleChange}>
+            {this.state.plowTypes.map((type, index) => {
+              return <option key={index} value={type}>{type}</option>
+            })} </select> </label>
+
           <label>LOCATION:  <select value={this.state.location} name="location" onChange={this.handleChange}>
             {this.state.neigborhoods.map((hood, index) => {
               return <option key={index} value={hood}>{hood}</option>
             })} </select> </label>
+
           <button>Update</button>
         </form>
       </If>
